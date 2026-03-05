@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "npx hardhat compile",
+    "test": "npx hardhat test",
+    "abi": "node scripts/abi.js",
+    "deploy:local": "npx hardhat run scripts/deploy.js --network localhost",
+    "full-prep": "npm run compile && npm run abi"
   },
   "keywords": [],
   "author": "",
