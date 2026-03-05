@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract Web3Booking {
+contract BookingSystem {
     event NewBooking(uint indexed id, uint indexed property_id, address guest, uint amount);
     event BookingStatusChanged(uint indexed id, string status);
 
