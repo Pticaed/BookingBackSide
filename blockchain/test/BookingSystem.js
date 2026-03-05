@@ -11,7 +11,7 @@ describe("BookingSystem", () => {
         return { c_booking, owner, guest, stranger };
     }
 
-    it("should allow to create a property", async () => {
+    it("Should allow to create a property", async () => {
         const { c_booking, owner } = await loadFixture(deploy);
         const price = ethers.parseEther("0.1");
 
@@ -23,7 +23,7 @@ describe("BookingSystem", () => {
         expect(properties[0].price_per_night).to.equal(price);
     });
 
-    it("should create a booking and lock funds in contract", async () => {
+    it("Should create a booking and lock funds in contract", async () => {
         const { c_booking, owner, guest } = await loadFixture(deploy);
         const price = ethers.parseEther("1.0");
 
@@ -38,7 +38,7 @@ describe("BookingSystem", () => {
         expect(bookings[0].status).to.equal("confirmed");
     });
 
-    it("should complete booking and transfer funds to property owner", async () => {
+    it("Should complete booking and transfer funds to property owner", async () => {
         const { c_booking, owner, guest } = await loadFixture(deploy);
         const price = ethers.parseEther("2.0");
 
@@ -53,7 +53,7 @@ describe("BookingSystem", () => {
         expect(bookings[0].status).to.equal("Completed");
     });
 
-    it("should allow guest to add a review", async () => {
+    it("Should allow guest to add a review", async () => {
         const { c_booking, owner, guest } = await loadFixture(deploy);
         
         await c_booking.connect(owner).create_property(ethers.parseEther("0.1"));
@@ -68,7 +68,7 @@ describe("BookingSystem", () => {
         expect(reviews[0].ipfs_cid).to.equal(reviewCid);
     });
 
-    it("should revert if stranger tries to complete booking", async () => {
+    it("Should revert if stranger tries to complete booking", async () => {
         const { c_booking, owner, guest, stranger } = await loadFixture(deploy);
         
         await c_booking.connect(owner).create_property(ethers.parseEther("0.1"));
