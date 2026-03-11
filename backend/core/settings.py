@@ -16,6 +16,12 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+# Blockchain
+BLOCKCHAIN_RPC_URL = "http://127.0.0.1:8545" # URL Polygon
+CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+BLOCKCHAIN_ABI_PATH = "booking/blockchain_abi/BookingSystem.json" # ABI
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
