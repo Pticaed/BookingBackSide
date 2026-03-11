@@ -1,9 +1,7 @@
-from django.db import models
 import uuid
 from django.db import models
 from django.conf import settings
 from django.core.exceptions import ValidationError
-
 
 class Property(models.Model):
 
@@ -28,8 +26,8 @@ class Property(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
 
-    city = models.BigIntegerField()
-    country = models.BigIntegerField()
+    city = models.CharField(max_length=100)
+    country = models.CharField(max_length=100)
 
     price_per_night = models.DecimalField(
         max_digits=12,
@@ -54,12 +52,25 @@ class Property(models.Model):
     def __str__(self):
         return self.title
 
+
 class Booking(models.Model):
+
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('confirmed', 'Confirmed'),
+        ('cancelled', 'Cancelled'),
+        ('completed', 'Completed'),
+    ]
 
     id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
         editable=False
+    )
+    
+    blockchain_id = models.IntegerField(
+        blank=True,
+        null=True
     )
 
     property = models.ForeignKey(
@@ -89,7 +100,11 @@ class Booking(models.Model):
         null=True
     )
 
-    status = models.CharField(max_length=50)
+    status = models.CharField(
+        max_length=20, 
+        choices=STATUS_CHOICES,
+        default='pending'
+    )
 
     created_at = models.DateTimeField(
         auto_now_add=True
@@ -111,9 +126,6 @@ class Booking(models.Model):
         return f"Booking {self.id}"
 
 
-# =========================
-# REVIEW
-# =========================
 class Review(models.Model):
 
     id = models.UUIDField(
@@ -151,9 +163,6 @@ class Review(models.Model):
         return f"Review {self.rating}"
 
 
-# =========================
-# PRICE HISTORY
-# =========================
 class PriceHistory(models.Model):
 
     id = models.UUIDField(
