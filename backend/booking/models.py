@@ -18,7 +18,6 @@ class Property(models.Model):
 
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        to_field="wallet_address",
         on_delete=models.CASCADE,
         related_name="properties"
     )
@@ -81,7 +80,6 @@ class Booking(models.Model):
 
     guest = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        to_field="wallet_address",
         on_delete=models.CASCADE,
         related_name="guest_bookings"
     )
